@@ -1,0 +1,17 @@
+.pianoRollWrapper {
+  position: relative;
+  width: 800px;
+  height: 400px;
+}
+
+.whiteKeysCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.blackKeysCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "latest",
+    "opensheetmusicdisplay": "^1.8.4",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "webmidi": "^3.1.6"
   },
   "devDependencies": {
     "autoprefixer": "latest",

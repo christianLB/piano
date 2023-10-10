@@ -39,7 +39,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Features
 
-- Loads up a musicXML file using OSMD. (Open Sheet Music Display) www.opens
+- Loads up a musicXML file using Open Sheet Music Display (https://opensheetmusicdisplay.github.io/)
 - Piano Roll feedback of played notes.
 - Cursor score navigation.
 - Highlights correctly played notes under the cursor.

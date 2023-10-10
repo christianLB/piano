@@ -113,13 +113,11 @@ const useNote = (osmd) => {
   };
 
   const isLeftHand = (sourceNote) => {
-    if (!sourceNote || !sourceNote.ParentStaff) return false;
-    return sourceNote.ParentStaff.id > 1;
+    return sourceNote?.ParentStaff?.id > 1;
   };
 
   const isRightHand = (sourceNote) => {
-    if (!sourceNote || !sourceNote.ParentStaff) return false;
-    return sourceNote.ParentStaff.id === 1;
+    return sourceNote?.ParentStaff?.id === 1;
   };
 
   return {

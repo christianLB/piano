@@ -110,11 +110,21 @@ export default function Piano() {
               </button>
               <button
                 className={`${
-                  selectedHands.right ? "text-red-500" : "text-gray-500"
+                  selectedHands.left ? "text-gray-900" : "text-gray-200"
+                }`}
+                onClick={() => toggleHandSelection("left")}
+              >
+                {/* <FontAwesomeIcon icon={faKeyboard} /> */}
+                LH
+              </button>
+              <button
+                className={`${
+                  selectedHands.right ? "text-gray-900" : "text-gray-200"
                 }`}
                 onClick={() => toggleHandSelection("right")}
               >
-                <FontAwesomeIcon icon={faKeyboard} />
+                {/* <FontAwesomeIcon icon={faKeyboard} /> */}
+                RH
               </button>
               <button
                 className={`${

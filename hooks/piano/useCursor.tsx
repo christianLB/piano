@@ -88,31 +88,26 @@ const useCursor = (
   // # create a function that will return true if the notes are on
   const compareNotes = (beatNotes = [], notesOn = [], selectedHands) => {
     if (!notesOn.length) return false;
-
     const OCTAVE_OFFSET = 12;
+    const notesOnSet = new Set(notesOn);
 
-    let allNotesOn = true;
-    beatNotes.forEach((beatNote) => {
-      if (beatNote.vfpitch) {
-        const sourceNote = beatNote.sourceNote;
-        if (
-          (isLeftHand(sourceNote) && !!selectedHands.left) ||
-          (isRightHand(sourceNote) && !!selectedHands.right)
-        ) {
-          const halfTone = sourceNote.pitch.halfTone;
-          const transposedHalfTone = halfTone + OCTAVE_OFFSET;
-          const includes = notesOn.includes(transposedHalfTone);
-          if (includes) {
-            highlight(beatNote, "green");
-          } else {
-            allNotesOn = false;
-            highlight(beatNote, "black");
-          }
-        }
+    return beatNotes.every((beatNote) => {
+      if (!beatNote.vfpitch) return true; // Skip processing if vfpitch is not defined
+      const { sourceNote } = beatNote;
+      const { halfTone } = sourceNote;
+      const isRight = isRightHand(sourceNote);
+      const isLeft = isLeftHand(sourceNote);
+      if (
+        (isLeft && !!selectedHands.left) ||
+        (isRight && !!selectedHands.right)
+      ) {
+        const transposedHalfTone = halfTone + OCTAVE_OFFSET;
+        const includes = notesOnSet.has(transposedHalfTone);
+        highlight(beatNote, includes ? "green" : "black");
+        return includes; // Return whether the note is found
       }
+      return true; // If hand selection conditions are not met, return true to continue
     });
-
-    return allNotesOn;
   };
 
   const handleMidiEvent = (event) => {
@@ -179,9 +174,35 @@ const useCursor = (
   // Move cursor to the next note
   const next = () => {
     if (cursor) {
-      cursor.next();
+      customNext();
     }
   };
+
+  function customNext() {
+    // Utility function to check the playability of a note based on selected hands
+    const isRelevantNote = (note) => {
+      if (note.sourceNote.isRestFlag) return false;
+      console.log(note, note.sourceNote.isRestFlag);
+      return (
+        (isRightHand(note.sourceNote) && selectedHands.right) ||
+        (isLeftHand(note.sourceNote) && selectedHands.left)
+      );
+    };
+    // Function to process the next beat
+    const processNextBeat = () => {
+      cursor.next();
+      const notes = cursor.GNotesUnderCursor();
+      const relevantNotes = notes.filter(isRelevantNote);
+      if (relevantNotes.length > 0) {
+        // A beat with relevant notes is found, so return.
+        return;
+      } else {
+        // No relevant notes found, so check the next beat.
+        processNextBeat();
+      }
+    };
+    processNextBeat();
+  }
 
   // Move cursor to the previous note
   const prev = () => {

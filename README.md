@@ -45,3 +45,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Highlights correctly played notes under the cursor.
 - Automatically jumps to the next beat when all notes are played correctly.
 - Allows for separate hands tracking.
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Submit a pull request.
+
+## License
+
+MIT

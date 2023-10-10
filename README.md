@@ -1,6 +1,8 @@
 # Piano Project
 
-A web-based interactive piano application built with TypeScript and React.
+A web-based interactive piano learning assistant that lets you track your progress.
+
+![Screenshot Description](.github/screenshots/screenshot1.png)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
